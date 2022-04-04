@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "202687364774",
+    "project_id": "convida-ai-database-6baf3",
+    "storage_bucket": "convida-ai-database-6baf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202687364774:android:10fe6bc8ea1e706796be67",
+        "android_client_info": {
+          "package_name": "com.nagano.convida_ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202687364774-m7brie8e8tpkih5ijhu00ars7siv08dq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nagano.convida_ai",
+            "certificate_hash": "2011859d688d91bc5b33f1ee74fc8cd227a908ee"
+          }
+        },
+        {
+          "client_id": "202687364774-vvf3bqg9k5fdjmmft20nklr87oqbn5rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWCU_P8fxrkfC5oGySg5Og8yCE5wdb3-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202687364774-vvf3bqg9k5fdjmmft20nklr87oqbn5rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

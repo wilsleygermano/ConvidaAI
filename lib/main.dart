@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  //FirebaseFirestore firestore = FirebaseFirestore.instance;
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has

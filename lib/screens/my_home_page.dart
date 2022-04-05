@@ -1,3 +1,4 @@
+import 'package:convida_ai_1/components/my_card.dart';
 import 'package:flutter/material.dart';
 
 import '../components/my_sliver_app_bar.dart';
@@ -22,13 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // deletar a partir daqui até o próximo comentário, pois este código serve apenas de teste
           SliverList(delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  color: index.isOdd ? Colors.white : Colors.black12,
-                  height: 100.0,
-                  child: Center(
-                    child: Text('$index', textScaleFactor: 5),
-                  ),
-                );
+                return MyCard();
               },
               childCount: 20,
             ),

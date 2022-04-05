@@ -16,6 +16,7 @@ class AppTheme {
       ),
       iconTheme: IconThemeData(
         color: AppColors.buttonsColor,
+        size: 32,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

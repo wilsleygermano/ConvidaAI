@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                     child: ElevatedButton(
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: const Text('Login'),
-                      onPressed: () {},
+                      onPressed: () {
+                        CollectionReference users =
+                            FirebaseFirestore.instance.collection('users');
+                        print(users);
+                      },
                     ))),
             Container(
                 margin: const EdgeInsets.only(left: 10),
@@ -68,4 +73,3 @@ class _LoginWidgetState extends State<LoginWidget> {
     ));
   }
 }
-//Theme.of(context).appBarTheme.titleTextStyle,

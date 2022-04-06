@@ -1,3 +1,4 @@
+import 'package:convida_ai_1/components/my_drawer.dart';
 import 'package:flutter/material.dart';
 
 class MySliverAppBar extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
     return SliverAppBar(
       leading: IconButton(
         iconSize: 32,
-        onPressed: () {},
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MyDrawer())),
         icon: Icon(Icons.menu),
         color: Theme.of(context).appBarTheme.iconTheme!.color,
       ),

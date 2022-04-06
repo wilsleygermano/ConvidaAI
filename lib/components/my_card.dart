@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCard extends StatefulWidget {
-  const MyCard({Key? key}) : super(key: key);
+  const MyCard({Key? key, this.eventName = 'Nome do Evento', this.eventDate = '07/07/2022', this.eventLocation = 'R.Nunes Machado, 1000'}) : super(key: key);
+
+  final String eventName;
+  final String eventDate;
+  final String eventLocation;
 
   @override
   State<MyCard> createState() => _MyCardState();
@@ -79,7 +83,7 @@ class _MyCardState extends State<MyCard> {
                     child: Row(
                       children: [
                         Text(
-                          'Nome do Evento',
+                          widget.eventName,
                           softWrap: true,
                           style: TextStyle(
                             fontFamily: GoogleFonts.inter().fontFamily,

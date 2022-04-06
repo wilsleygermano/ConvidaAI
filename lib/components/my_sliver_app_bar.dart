@@ -1,3 +1,4 @@
+import 'package:convida_ai_1/screens/invite_creation.dart';
 import 'package:flutter/material.dart';
 
 class MySliverAppBar extends StatefulWidget {
@@ -24,7 +25,12 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
       actions: [
         IconButton(
           iconSize: 32,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const InviteCreation()),
+            );
+          },
           icon: const Icon(Icons.add),
           color: Theme.of(context).appBarTheme.iconTheme!.color,
         ),

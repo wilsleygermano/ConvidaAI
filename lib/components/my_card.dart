@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCard extends StatefulWidget {
-  const MyCard({Key? key, this.eventName = 'Nome do Evento', this.eventDate = '07/07/2022', this.eventLocation = 'R.Nunes Machado, 1000'}) : super(key: key);
+  const MyCard(
+      {Key? key,
+      this.eventName = 'Nome do Evento',
+      this.eventDate = '08/07/2018',
+      this.eventLocation = 'R.Nunes Machado, 1000',
+      this.eventImage = const AssetImage('lib/assets/festa.png')})
+      : super(key: key);
 
   final String eventName;
   final String eventDate;
   final String eventLocation;
+  final ImageProvider<Object> eventImage;
 
   @override
   State<MyCard> createState() => _MyCardState();
@@ -30,6 +37,7 @@ class _MyCardState extends State<MyCard> {
           width: 328,
           height: 112,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -40,7 +48,7 @@ class _MyCardState extends State<MyCard> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image(
-                        image: AssetImage('lib/assets/festa.png'),
+                        image: widget.eventImage,
                         width: 96,
                         height: 96,
                       ),
@@ -62,7 +70,7 @@ class _MyCardState extends State<MyCard> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Row(
@@ -77,9 +85,10 @@ class _MyCardState extends State<MyCard> {
                 ),
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 16),
+                    padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
                     child: Row(
                       children: [
                         Text(
@@ -87,7 +96,7 @@ class _MyCardState extends State<MyCard> {
                           softWrap: true,
                           style: TextStyle(
                             fontFamily: GoogleFonts.inter().fontFamily,
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: AppColors.textFieldColor,
                             overflow: TextOverflow.ellipsis,
@@ -96,8 +105,52 @@ class _MyCardState extends State<MyCard> {
                       ],
                     ),
                   ),
-                  Row(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          top: 2.0,
+                        ),
+                        child: Text(
+                          widget.eventDate,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.miniTextColor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16.0,
+                          top: 22.0,
+                        ),
+                        child: Text(
+                          widget.eventLocation,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: AppColors.miniTextColor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
+                
               ),
             ],
           ),

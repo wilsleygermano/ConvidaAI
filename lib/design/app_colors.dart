@@ -8,4 +8,5 @@ class AppColors {
   static Color titlesColor = HexColor("DD5D4A");
   static Color backgroundColor = Colors.white;
   static Color miniIconsColor = HexColor('AC1900');
+  static Color miniTextColor = HexColor('999999');
 }

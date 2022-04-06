@@ -1,6 +1,11 @@
 import 'package:convida_ai_1/screens/login_screen.dart';
+<<<<<<< Updated upstream
 
 import 'package:convida_ai_1/components/my_card.dart';
+=======
+import 'package:convida_ai_1/screens/my_home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+>>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 
 import '../components/my_sliver_app_bar.dart';
@@ -18,6 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
       body: CustomScrollView(
         slivers: <Widget>[
           MySliverAppBar(),
@@ -33,6 +39,17 @@ class _MyHomePageState extends State<MyHomePage> {
           // deletar até aqui para remover o código teste da sliverappbar
         ],
       ),
+=======
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const MyHome();
+            } else {
+              return const LoginWidget();
+            }
+          }),
+>>>>>>> Stashed changes
     );
   }
 }

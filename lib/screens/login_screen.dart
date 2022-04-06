@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -9,6 +11,16 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,6 +32,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         Container(
             margin: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
             child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     hintText: 'E-mail',
                     enabledBorder: UnderlineInputBorder(
@@ -31,6 +44,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         Container(
             margin: const EdgeInsets.only(left: 25, right: 25, bottom: 138),
             child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: 'Password',
@@ -51,7 +65,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     child: ElevatedButton(
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: const Text('Login'),
-                      onPressed: () {},
+                      onPressed: signIn,
                     ))),
             Container(
                 margin: const EdgeInsets.only(left: 10),
@@ -67,5 +81,11 @@ class _LoginWidgetState extends State<LoginWidget> {
       ],
     ));
   }
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+  }
 }
-//Theme.of(context).appBarTheme.titleTextStyle,

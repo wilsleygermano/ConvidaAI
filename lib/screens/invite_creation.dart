@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:convida_ai_1/components/show_options.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class InviteCreation extends StatefulWidget {
-  const InviteCreation({Key? key, this.nameYourEvent = 'INSIRA O NOME DO SEU EVENTO'}) : super(key: key);
+  const InviteCreation(
+      {Key? key, this.nameYourEvent = 'INSIRA O NOME DO SEU EVENTO'})
+      : super(key: key);
 
   final String nameYourEvent;
 
@@ -12,6 +17,8 @@ class InviteCreation extends StatefulWidget {
 }
 
 class _InviteCreationState extends State<InviteCreation> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +52,31 @@ class _InviteCreationState extends State<InviteCreation> {
                   ),
                 ),
               ),
-              
-            )
+            ),
+            SizedBox(
+              height: 80,
+              width: 80,
+            ),
+            Center(
+              child: SizedBox(
+                height: 300,
+                width: 300,
+                child: InkWell(
+                  onTap: () => showOptions(context),
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
+                    child: Image(image: AssetImage('lib/assets/photo.png'),
+                    fit: BoxFit.fill,),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

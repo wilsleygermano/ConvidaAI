@@ -7,4 +7,5 @@ class AppColors {
   static Color textFieldColor = HexColor("AC1900");
   static Color titlesColor = HexColor("DD5D4A");
   static Color backgroundColor = Colors.white;
+  static Color miniIconsColor = HexColor('AC1900');
 }

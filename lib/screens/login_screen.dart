@@ -1,4 +1,5 @@
 import 'package:convida_ai_1/design/app_colors.dart';
+import 'package:convida_ai_1/screens/create_user_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                     child: ElevatedButton(
                         child: const Text('Registrar'),
                         style: Theme.of(context).elevatedButtonTheme.style,
-                        onPressed: () {})))
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CreateUserWidget()));
+                        })))
           ],
         )
       ],

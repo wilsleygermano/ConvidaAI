@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^3.3.12
   provider: ^6.0.2
   image_picker: ^0.8.5
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

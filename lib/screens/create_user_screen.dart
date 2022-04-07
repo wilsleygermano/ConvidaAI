@@ -103,8 +103,11 @@ class CreateUserWidgetState extends State<CreateUserWidget> {
                       style: Theme.of(context).elevatedButtonTheme.style,
                       child: const Text('Criar Conta'),
                       onPressed: () async {
-                        if (passwordController.text ==
-                            confirmePasswordController.text) {
+                        if ((emailController.text.isNotEmpty == true &&
+                                passwordController.text.isNotEmpty == true &&
+                                pixController.text.isNotEmpty == true) &&
+                            passwordController.text ==
+                                confirmePasswordController.text) {
                           FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: emailController.text,
@@ -113,9 +116,7 @@ class CreateUserWidgetState extends State<CreateUserWidget> {
                                     FirebaseFirestore.instance
                                         .collection('users')
                                         .doc()
-                                        .set(Usuario(
-                                                emailController.text,
-                                                passwordController.text,
+                                        .set(Usuario(emailController.text,
                                                 pixController.text)
                                             .toJson())
                                         .then((_) => {
@@ -145,6 +146,23 @@ class CreateUserWidgetState extends State<CreateUserWidget> {
                                             })
                                   });
                           // inserir dados no firebase
+                        } else if (emailController.text.isNotEmpty != true ||
+                            passwordController.text.isNotEmpty != true ||
+                            pixController.text.isNotEmpty != true) {
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                    title: const Text('Falha'),
+                                    content: const Text(
+                                        'Todos os campos devem ser preenchidos!'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ));
                         } else {
                           showDialog<String>(
                               context: context,

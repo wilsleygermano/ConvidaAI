@@ -25,51 +25,45 @@ class _MyImagePickerState extends State<MyImagePicker> {
         context: context,
         builder: (context) {
           // ignore: sized_box_for_whitespace
-          return Container(
-              height: 150,
-              child: Column(children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.photo_camera),
-                  title: Text("Tirar foto"),
-                  onTap: () => pickImage(ImageSource.camera),
-                ),
-                ListTile(
-                  leading: Icon(Icons.photo_library),
-                  title: Text("Escolha uma foto da biblioteca"),
-                  onTap: () => pickImage(ImageSource.gallery),
-                )
-              ]));
+          return Column(children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.photo_camera),
+              title: Text("Tirar foto"),
+              onTap: () => pickImage(ImageSource.camera),
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text("Escolha uma foto da biblioteca"),
+              onTap: () => pickImage(ImageSource.gallery),
+            )
+          ]);
         });
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        height: 300,
-        width: 300,
-        child: InkWell(
-          onTap: () => _showOptions(context),
-          child: Card(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                side: BorderSide(
-                  color: Colors.grey.shade300,
-                ),
+      child: InkWell(
+        onTap: () => _showOptions(context),
+        child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              side: BorderSide(
+                color: Colors.grey.shade300,
               ),
-              child: image != null
-                  ? ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.file(
-                        image!,
-                        width: 300,
-                        height: 300,
-                        fit: BoxFit.cover,
-                      ),
-                  )
-                  : Image.asset('lib/assets/photo.png')),
-        ),
+            ),
+            child: image != null
+                ? ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.file(
+                      image!,
+                      width: 350,
+                      height: 350,
+                      fit: BoxFit.cover,
+                    ),
+                )
+                : Image.asset('lib/assets/photo.png')),
       ),
     );
   }

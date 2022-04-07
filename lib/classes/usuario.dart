@@ -1,13 +1,13 @@
 class Usuario {
-  String email;
+  String uid;
   String pix;
 
-  Usuario(this.email, this.pix);
+  Usuario(this.uid, this.pix);
   Map<String, dynamic> toJson() {
-    return {'email': email, 'pix': pix};
+    return {'uid': uid, 'pix': pix};
   }
 
   Usuario fromJson(Map<String, dynamic> json) {
-    return Usuario(json['email'], json['pix']);
+    return Usuario(json['uid'], json['pix']);
   }
 }

@@ -112,11 +112,11 @@ class CreateUserWidgetState extends State<CreateUserWidget> {
                               .createUserWithEmailAndPassword(
                                   email: emailController.text,
                                   password: passwordController.text)
-                              .whenComplete(() => {
+                              .then((userCredential) => {
                                     FirebaseFirestore.instance
                                         .collection('users')
                                         .doc()
-                                        .set(Usuario(emailController.text,
+                                        .set(Usuario(userCredential.user!.uid,
                                                 pixController.text)
                                             .toJson())
                                         .then((_) => {

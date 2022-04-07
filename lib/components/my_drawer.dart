@@ -1,4 +1,5 @@
 import 'package:convida_ai_1/design/app_colors.dart';
+import 'package:convida_ai_1/screens/about_screen.dart';
 import 'package:convida_ai_1/screens/my_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,10 @@ class MyDrawer extends StatelessWidget {
                   Icons.home_outlined,
                   color: AppColors.buttonsColor,
                 ),
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage())),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MyHomePage())),
               ),
               title: Padding(
                 padding: const EdgeInsets.only(top: 8, left: 16),
@@ -40,7 +44,6 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
             ),
-         
             Divider(
               color: AppColors.miniTextColor,
               thickness: 1,
@@ -52,7 +55,12 @@ class MyDrawer extends StatelessWidget {
                   Icons.info_outlined,
                   color: AppColors.buttonsColor,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutWidget()));
+                },
               ),
               title: Padding(
                 padding: const EdgeInsets.only(top: 8, left: 16),
@@ -67,7 +75,6 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
             ),
-          
             Divider(
               color: AppColors.miniTextColor,
               thickness: 1,
@@ -79,8 +86,10 @@ class MyDrawer extends StatelessWidget {
                   Icons.logout_outlined,
                   color: AppColors.buttonsColor,
                 ),
-                onPressed: () { FirebaseAuth.instance.signOut();
-                Navigator.pop(context);},
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pop(context);
+                },
               ),
               title: Padding(
                 padding: const EdgeInsets.only(top: 8, left: 16),
@@ -93,7 +102,6 @@ class MyDrawer extends StatelessWidget {
                     color: AppColors.titlesColor,
                   ),
                 ),
-                
               ),
             ),
             Divider(

@@ -20,6 +20,8 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         backgroundColor:
             MaterialStateProperty.all<Color>(AppColors.buttonsColor),
         textStyle: MaterialStateProperty.all<TextStyle>(

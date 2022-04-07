@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:convida_ai_1/components/show_options.dart';
+import 'package:convida_ai_1/components/my_image_picker.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,26 +57,7 @@ class _InviteCreationState extends State<InviteCreation> {
               height: 80,
               width: 80,
             ),
-            Center(
-              child: SizedBox(
-                height: 300,
-                width: 300,
-                child: InkWell(
-                  onTap: () => showOptions(context),
-                  child: Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(
-                        color: Colors.grey.shade300,
-                      ),
-                    ),
-                    child: Image(image: AssetImage('lib/assets/photo.png'),
-                    fit: BoxFit.fill,),
-                  ),
-                ),
-              ),
-            ),
+            MyImagePicker(),
           ],
         ),
       ),

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:convida_ai_1/components/event_name_field.dart';
 import 'package:convida_ai_1/components/invite_fields.dart';
 import 'package:convida_ai_1/components/invite_fields_text.dart';
 import 'package:convida_ai_1/components/my_image_picker.dart';
+import 'package:convida_ai_1/screens/invite_creation_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class InviteCreation extends StatefulWidget {
   const InviteCreation(
@@ -16,6 +20,9 @@ class InviteCreation extends StatefulWidget {
 }
 
 class _InviteCreationState extends State<InviteCreation> {
+  final _controller = InviteCreationController();
+  File? file;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +37,22 @@ class _InviteCreationState extends State<InviteCreation> {
               EventNameField(
                 nameEvent: widget.nameYourEvent,
               ),
-              MyImagePicker(),
+              ImagePreviewWidget(
+                  previewImage: file,
+                  onCameraTap: () async {
+                    final pickedFile =
+                        await _controller.pickImage(ImageSource.camera);
+                    setState(() {
+                      file = pickedFile;
+                    });
+                  },
+                  onGalleryTap: () async {
+                    final pickedFile =
+                        await _controller.pickImage(ImageSource.gallery);
+                    setState(() {
+                      file = pickedFile;
+                    });
+                  }),
               Row(
                 children: const [
                   Expanded(
@@ -91,94 +113,16 @@ class _InviteCreationState extends State<InviteCreation> {
                   child: ElevatedButton(
                     child: const Text('Criar'),
                     style: Theme.of(context).elevatedButtonTheme.style,
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (file != null) {
+                        await _controller.uploadImage(file!);
+                      }
+                    },
                   ),
                 ),
               ),
-
-              // Row(
-              //   mainAxisSize: MainAxisSize.min,
-              //   children: [
-              //     Column(
-              //       mainAxisSize: MainAxisSize.min,
-              //       children: [
-              //         InviteFields(
-              //           fieldTitle: 'Data:',
-              //           topPadding: 8.0,
-              //         ),
-              //         const InviteFields(fieldTitle: 'Local:'),
-              //         InviteFields(fieldTitle: 'Valor:'),
-              //         InviteFields(fieldTitle: 'PIX:'),
-              //       ],
-              //     ),
-              //     // Column(
-              //     //   mainAxisSize: MainAxisSize.min,
-              //     //   children: [
-              //     //     InviteFieldsText(myHintText: '01/04/2022'),
-              //     //     InviteFieldsText(myHintText: 'R. Nunes Machado, 1000'),
-              //     //     InviteFieldsText(myHintText: "R\$ 50,00"),
-              //     //     InviteFieldsText(myHintText: '(41) 99999-9999'),
-              //     //   ],
-              //     // ),
-              //   ],
-              // ),
             ],
           ),
-        )
-        // SingleChildScrollView(
-        //   child: Column(
-        //     children: [
-        //       SizedBox(
-        //         height: 60,
-        //         width: 400,
-        //         child: EventNameField(
-        //           nameEvent: widget.nameYourEvent,
-        //         ),
-        //       ),
-        //       const SizedBox(
-        //         height: 40,
-        //         width: 80,
-        //       ),
-        //       MyImagePicker(),
-        //       const SizedBox(
-        //         height: 40,
-        //         width: 80,
-        //       ),
-        //       Column(
-        //         children: [
-        //           Row(
-        //             mainAxisSize: MainAxisSize.min,
-        //             // ignore: prefer_const_literals_to_create_immutables
-        //             children: [
-        //               Column(
-        //                 children: [
-        //                   const InviteFields(fieldTitle: 'Data:', topPadding: 8.0,),
-        //                   const InviteFields(fieldTitle: 'Local:'),
-        //                   const InviteFields(fieldTitle: 'Valor:'),
-        //                   const InviteFields(fieldTitle: 'PIX:'),
-        //                 ],
-        //               ),
-        //             ],
-        //           ),
-
-        //         ],
-        //       )
-        //       // Container(
-        //       //   margin: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
-        //       //   child: TextField(
-        //       //     decoration: InputDecoration(
-        //       //       hintText: 'E-mail',
-        //       //       enabledBorder: UnderlineInputBorder(
-        //       //           borderSide: BorderSide(color: AppColors.textFieldColor)),
-        //       //       focusedBorder: UnderlineInputBorder(
-        //       //         borderSide: BorderSide(color: AppColors.textFieldColor),
-        //       //       ),
-        //       //     ),
-        //       //   ),
-        //       // ),
-        //     ],
-        //   ),
-        // ),
-        );
+        ));
   }
 }

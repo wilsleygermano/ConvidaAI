@@ -1,50 +1,35 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
-class MyImagePicker extends StatefulWidget {
-  MyImagePicker({Key? key}) : super(key: key);
+class ImagePreviewWidget extends StatefulWidget {
+  final Function() onCameraTap;
+  final Function() onGalleryTap;
+  final File? previewImage;
+
+  const ImagePreviewWidget(
+      {Key? key,
+      required this.onCameraTap,
+      required this.onGalleryTap,
+      this.previewImage})
+      : super(key: key);
 
   @override
-  State<MyImagePicker> createState() => _MyImagePickerState();
+  State<ImagePreviewWidget> createState() => ImagePreviewWidgetState();
 }
 
-class _MyImagePickerState extends State<MyImagePicker> {
-  File? image;
-
-  _showOptions(BuildContext context) {
-    Future pickImage(ImageSource source) async {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-      final imageTemporary = File(image.path);
-      setState(() => this.image = imageTemporary);
-    }
-
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          // ignore: sized_box_for_whitespace
-          return Column(children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.photo_camera),
-              title: Text("Tirar foto"),
-              onTap: () => pickImage(ImageSource.camera),
-            ),
-            ListTile(
-              leading: Icon(Icons.photo_library),
-              title: Text("Escolha uma foto da biblioteca"),
-              onTap: () => pickImage(ImageSource.gallery),
-            )
-          ]);
-        });
-  }
-
+class ImagePreviewWidgetState extends State<ImagePreviewWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: InkWell(
-        onTap: () => _showOptions(context),
+        onTap: () => showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return _ImagePickerOptionsWidget(
+                onCameraTap: widget.onCameraTap,
+                onGalleryTap: widget.onGalleryTap);
+          },
+        ),
         child: Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
@@ -53,18 +38,42 @@ class _MyImagePickerState extends State<MyImagePicker> {
                 color: Colors.grey.shade300,
               ),
             ),
-            child: image != null
+            child: widget.previewImage != null
                 ? ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.file(
-                      image!,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.file(
+                      widget.previewImage!,
                       width: 350,
                       height: 350,
                       fit: BoxFit.cover,
                     ),
-                )
+                  )
                 : Image.asset('lib/assets/photo.png')),
       ),
+    );
+  }
+}
+
+class _ImagePickerOptionsWidget extends StatelessWidget {
+  final Function() onCameraTap;
+  final Function() onGalleryTap;
+  const _ImagePickerOptionsWidget(
+      {Key? key, required this.onCameraTap, required this.onGalleryTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+            leading: const Icon(Icons.photo_camera),
+            title: const Text("Tirar foto"),
+            onTap: onCameraTap),
+        ListTile(
+            leading: const Icon(Icons.photo_library),
+            title: const Text("Escolha uma foto da biblioteca"),
+            onTap: onGalleryTap)
+      ],
     );
   }
 }

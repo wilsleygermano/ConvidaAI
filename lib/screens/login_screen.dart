@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+  final Function mudarEstado;
+  const LoginWidget({Key? key, required this.mudarEstado}) : super(key: key);
 
   @override
   State<LoginWidget> createState() => _LoginWidgetState();
@@ -13,12 +14,19 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  late Function mudarEstado;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    this.mudarEstado = widget.mudarEstado;
+    super.initState();
   }
 
   @override
@@ -93,5 +101,6 @@ class _LoginWidgetState extends State<LoginWidget> {
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
     );
+    mudarEstado();
   }
 }

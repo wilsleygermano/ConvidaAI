@@ -4,7 +4,6 @@ import 'package:convida_ai_1/screens/login_screen.dart';
 
 import 'package:convida_ai_1/components/my_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../classes/evento.dart';
@@ -18,24 +17,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var storage;
   late List<Evento> eventsList;
 
   @override
   void initState() {
-    storage = FirebaseStorage.instance;
     getEvents();
     super.initState();
   }
 
-  void getEvents() async {
+  void getEvents() {
     eventsList = [];
     FirebaseFirestore.instance
         .collection('events')
         .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get()
-        .then((snapshot) => snapshot.docs
-            .forEach((doc) => eventsList.add(Evento.fromJson(doc.data()))));
+        .then((snapshot) => snapshot.docs.forEach((doc) {
+              setState(() => eventsList.add(Evento.fromJson(doc.data())));
+            }));
   }
 
   @override
@@ -45,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.active) {
+            if (snapshot.hasData) {
               return CustomScrollView(
                 slivers: <Widget>[
                   const MySliverAppBar(),
@@ -65,7 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               );
             } else {
-              return const LoginWidget();
+              return LoginWidget(
+                mudarEstado: () {
+                  setState(() {
+                    getEvents();
+                  });
+                },
+              );
             }
           }),
     );

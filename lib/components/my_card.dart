@@ -150,7 +150,6 @@ class _MyCardState extends State<MyCard> {
                     ],
                   ),
                 ],
-                
               ),
             ],
           ),

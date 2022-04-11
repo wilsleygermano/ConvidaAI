@@ -4,24 +4,32 @@ import 'package:convida_ai_1/components/event_name_field.dart';
 import 'package:convida_ai_1/components/invite_fields.dart';
 import 'package:convida_ai_1/components/invite_fields_text.dart';
 import 'package:convida_ai_1/components/my_image_picker.dart';
-import 'package:convida_ai_1/screens/invite_creation_controller.dart';
+import 'package:convida_ai_1/controller/invite_creation_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class InviteCreation extends StatefulWidget {
-  const InviteCreation(
-      {Key? key, this.nameYourEvent = 'INSIRA O NOME DO SEU EVENTO'})
-      : super(key: key);
-
-  final String? nameYourEvent;
+  const InviteCreation({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<InviteCreation> createState() => _InviteCreationState();
 }
 
 class _InviteCreationState extends State<InviteCreation> {
+  // 'importa' o controller criado no arquivo invite creation controller
   final _controller = InviteCreationController();
+  // variável para armazenar a foto selecionada
   File? file;
+  String? nameYourEvent = 'INSIRA O NOME DO SEU EVENTO';
+  TextEditingController? eventNameController  = TextEditingController();
+  TextEditingController? eventDateController = TextEditingController();
+  TextEditingController? eventLocationController = TextEditingController();
+  TextEditingController? eventCostController = TextEditingController();
+  TextEditingController? eventPaymentController = TextEditingController();
+  final userID = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +43,10 @@ class _InviteCreationState extends State<InviteCreation> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               EventNameField(
-                nameEvent: widget.nameYourEvent,
+                nameEvent: nameYourEvent,
+                textController: eventNameController,
               ),
+              // widget que tem a função de tirar/escolher foto e mostrar sua preview
               ImagePreviewWidget(
                   previewImage: file,
                   onCameraTap: () async {
@@ -54,21 +64,25 @@ class _InviteCreationState extends State<InviteCreation> {
                     });
                   }),
               Row(
-                children: const [
-                  Expanded(
+                children: [
+                  const Expanded(
                     child: InviteFields(
                       fieldTitle: 'Data:',
                       topPadding: 8.0,
                     ),
                   ),
                   Expanded(
-                      flex: 4,
-                      child: InviteFieldsText(myHintText: '01/04/2022')),
+                    flex: 4,
+                    child: InviteFieldsText(
+                      myHintText: '01/04/2022',
+                      textController: eventDateController,
+                    ),
+                  ),
                 ],
               ),
               Row(
-                children: const [
-                  Expanded(
+                children: [
+                  const Expanded(
                     child: InviteFields(
                       fieldTitle: 'Local:',
                       topPadding: 8.0,
@@ -77,33 +91,42 @@ class _InviteCreationState extends State<InviteCreation> {
                   Expanded(
                       flex: 4,
                       child: InviteFieldsText(
+                          textController: eventLocationController,
                           myHintText: 'R. Nunes Machado, 1000')),
                 ],
               ),
               Row(
-                children: const [
-                  Expanded(
+                children: [
+                  const Expanded(
                     child: InviteFields(
                       fieldTitle: 'Valor:',
                       topPadding: 8.0,
                     ),
                   ),
                   Expanded(
-                      flex: 4,
-                      child: InviteFieldsText(myHintText: 'R\$ 50,00')),
+                    flex: 4,
+                    child: InviteFieldsText(
+                      myHintText: 'R\$ 50,00',
+                      textController: eventCostController,
+                    ),
+                  ),
                 ],
               ),
               Row(
-                children: const [
-                  Expanded(
+                children: [
+                  const Expanded(
                     child: InviteFields(
                       fieldTitle: 'PIX',
                       topPadding: 8.0,
                     ),
                   ),
                   Expanded(
-                      flex: 4,
-                      child: InviteFieldsText(myHintText: '(41) 99999-9999')),
+                    flex: 4,
+                    child: InviteFieldsText(
+                      myHintText: '(41) 99999-9999',
+                      textController: eventPaymentController,
+                    ),
+                  ),
                 ],
               ),
               Container(
@@ -115,8 +138,16 @@ class _InviteCreationState extends State<InviteCreation> {
                     style: Theme.of(context).elevatedButtonTheme.style,
                     onPressed: () async {
                       if (file != null) {
-                        await _controller.uploadImage(file!);
+                        await _controller.uploadImage(file!, userID);
                       }
+                      await _controller.addTextFields(
+                        eventNameController!.text,
+                        eventDateController!.text,
+                        eventLocationController!.text,
+                        eventCostController!.text,
+                        eventPaymentController!.text,
+                        userID,
+                      );
                     },
                   ),
                 ),

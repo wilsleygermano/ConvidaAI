@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
+// widget que tem a função de selecionar a foto e mostrar sua preview
 class ImagePreviewWidget extends StatefulWidget {
+  // duas funções definidas para selecionar imagem da galeria/câmera
   final Function() onCameraTap;
   final Function() onGalleryTap;
+  // variável para armazenar a imagem de preview
   final File? previewImage;
 
   const ImagePreviewWidget(

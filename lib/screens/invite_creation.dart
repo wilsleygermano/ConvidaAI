@@ -5,8 +5,11 @@ import 'package:convida_ai_1/components/invite_fields.dart';
 import 'package:convida_ai_1/components/invite_fields_text.dart';
 import 'package:convida_ai_1/components/my_image_picker.dart';
 import 'package:convida_ai_1/controller/invite_creation_controller.dart';
+import 'package:convida_ai_1/design/app_colors.dart';
+import 'package:convida_ai_1/screens/my_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class InviteCreation extends StatefulWidget {
@@ -24,7 +27,7 @@ class _InviteCreationState extends State<InviteCreation> {
   // variável para armazenar a foto selecionada
   File? file;
   String? nameYourEvent = 'INSIRA O NOME DO SEU EVENTO';
-  TextEditingController? eventNameController  = TextEditingController();
+  TextEditingController? eventNameController = TextEditingController();
   TextEditingController? eventDateController = TextEditingController();
   TextEditingController? eventLocationController = TextEditingController();
   TextEditingController? eventCostController = TextEditingController();
@@ -147,6 +150,48 @@ class _InviteCreationState extends State<InviteCreation> {
                         eventCostController!.text,
                         eventPaymentController!.text,
                         userID,
+                      );
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'Convite Criado!',
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.titlesColor
+                            ),
+                          ),
+                          content: Text(
+                            'Agora é só esperar o grande dia',
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                              fontSize: 12,
+                              color: AppColors.textColor,
+                            ),
+                          ),
+                          actions: <Widget>[
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MyHomePage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Okay',
+                                style: TextStyle(
+                                  fontFamily: GoogleFonts.inter().fontFamily,
+                                  fontSize: 12,
+                                  color: AppColors.miniIconsColor
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),

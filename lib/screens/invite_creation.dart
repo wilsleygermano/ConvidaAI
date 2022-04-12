@@ -177,14 +177,13 @@ class _InviteCreationState extends State<InviteCreation> {
                             userID,
                             imageUrl,
                           );
-
+                          setState(() => isLoading = false);
                           await _dialogController.showMyDialog(
                               context,
                               'Convite Criado!',
                               'Agora é só aguardar o grande dia.',
                               'Ok', () async {
                             await captureScreen();
-                            setState(() => isLoading = false);
                           }, 'Compartilhar');
                         },
                       ),

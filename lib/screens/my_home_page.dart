@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           eventName: eventsList[index].titulo,
                           eventDate: eventsList[index].data,
                           eventLocation: eventsList[index].local,
-                          eventImage: NetworkImage(eventsList[index].url),
+                          eventImage: NetworkImage(eventsList[index].url!),
                         );
                       },
                       childCount: eventsList.length,

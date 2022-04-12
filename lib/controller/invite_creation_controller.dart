@@ -1,7 +1,6 @@
-import 'dart:ffi';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convida_ai_1/classes/evento.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,15 +35,9 @@ class InviteCreationController {
     return FirebaseFirestore.instance
         .collection('events')
         .doc()
-        .set({
-          'titulo': eventName,
-          'data': eventDate,
-          'local': eventLocation,
-          'valor': eventCost,
-          'event_payment': eventPayment,
-          'url': imageUrl,
-          'user_uid': uID,
-        })
+        .set(
+          Evento(eventName, imageUrl, eventDate, eventLocation, eventCost, eventPayment, uID).toJson()
+        )
         .then((value) => debugPrint('Event added'))
         .catchError((error) => debugPrint("Failed to add user: $error"));
   }
@@ -59,5 +52,6 @@ class InviteCreationController {
 
 
   }
+
 
 }

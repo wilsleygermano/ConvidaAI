@@ -4,8 +4,9 @@ class Evento {
   String data;
   String local;
   String valor;
+  String pix;
 
-  Evento(this.titulo, this.url, this.data, this.local, this.valor);
+  Evento(this.titulo, this.url, this.data, this.local, this.valor, this.pix);
 
   Map<String, dynamic> toJson() {
     return {
@@ -13,12 +14,13 @@ class Evento {
       'url': url,
       'data': data,
       'local': local,
-      'valor': valor
+      'valor': valor,
+      'pix': pix
     };
   }
 
   static Evento fromJson(Map<String, dynamic> json) {
     return Evento(json['titulo'], json['url'], json['data'], json['local'],
-        json['valor']);
+        json['valor'], json['pix']);
   }
 }

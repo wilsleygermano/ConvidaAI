@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,10 +13,10 @@ class InviteCreationController {
     return file;
   }
 
-  Future<void> uploadImage(File fileToUpload, String uID) async {
+  Future<void> uploadImage(File fileToUpload, String nameOfYourEvent) async {
     final storageRef = FirebaseStorage.instance.ref();
-    final invitationsRef = storageRef.child("images").child('Images of $uID');
-    final invitationsImagesRef = invitationsRef.child("convite de $uID em ${DateTime.now()}.jpg");
+    final invitationsRef = storageRef.child("images").child('Images of $nameOfYourEvent');
+    final invitationsImagesRef = invitationsRef.child("convite de $nameOfYourEvent.jpg");
     try {
       await invitationsImagesRef.putFile(fileToUpload);
     } on FirebaseException catch (e) {
@@ -29,18 +30,34 @@ class InviteCreationController {
       String eventLocation,
       String? eventCost,
       String? eventPayment,
-      String uID) async {
+      String uID,
+      String? imageUrl,
+      ) async {
     return FirebaseFirestore.instance
         .collection('events')
-        .doc("Eventos de $uID").collection('my_events').doc()
+        .doc()
         .set({
-          'event_name': eventName,
-          'event_date': eventDate,
-          'event_location': eventLocation,
-          'event_cost': eventCost,
-          'event_payment': eventPayment
+          'titulo': eventName,
+          'data': eventDate,
+          'local': eventLocation,
+          'valor': eventCost,
+          'event_payment': eventPayment,
+          'url': imageUrl,
+          'user_uid': uID,
         })
         .then((value) => debugPrint('Event added'))
         .catchError((error) => debugPrint("Failed to add user: $error"));
   }
+
+  Future<String> getImageUrl(String nameOfYourEvent) async {
+    final imageUrl = await FirebaseStorage.instance
+                            .ref()
+                            .child(
+                                "images/Images of $nameOfYourEvent/convite de $nameOfYourEvent.jpg")
+                            .getDownloadURL();
+    return imageUrl;
+
+
+  }
+
 }

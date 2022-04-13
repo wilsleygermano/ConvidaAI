@@ -4,23 +4,36 @@ import 'package:google_fonts/google_fonts.dart';
 import '../design/app_colors.dart';
 
 class InviteFieldsText extends StatefulWidget {
-  const InviteFieldsText({Key? key, required this.myHintText, this.textController})
+  const InviteFieldsText(
+      {Key? key,
+      required this.myHintText,
+      this.textController,
+      required this.isedit})
       : super(key: key);
 
   final String myHintText;
   final TextEditingController? textController;
-
+  final bool isedit;
 
   @override
   State<InviteFieldsText> createState() => _InviteFieldsTextState();
 }
 
 class _InviteFieldsTextState extends State<InviteFieldsText> {
+  late bool isedit;
+
+  @override
+  void initState() {
+    isedit = widget.isedit;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.textController,
       maxLength: 30,
+      readOnly: !isedit,
       style: TextStyle(
         fontFamily: GoogleFonts.inter().fontFamily,
         fontSize: 16,

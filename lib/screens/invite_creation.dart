@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:convida_ai_1/classes/my_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,6 +60,7 @@ class _InviteCreationState extends State<InviteCreation> {
   // variável para acessa a tela de carregamento
   bool isLoading = false;
   ScreenshotController screenshotController = ScreenshotController();
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -94,157 +94,168 @@ class _InviteCreationState extends State<InviteCreation> {
   }
 
   @override
-  Widget build(BuildContext context) => isLoading
+  Widget build(BuildContext context) =>
+      isLoading
       ? const LoadingScreen()
       : Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-          ),
-          body: SingleChildScrollView(
-            child: Screenshot(
-              controller: screenshotController,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  EventNameField(
-                    isedit: isCreate,
-                    nameEvent: nameYourEvent,
-                    textController: eventNameController,
-                  ),
-                  // widget que tem a função de tirar/escolher foto e mostrar sua preview
-                  isCreate
-                      ? ImagePreviewWidget(
-                          previewImage: file,
-                          onCameraTap: () async {
-                            final pickedFile =
-                                await _controller.pickImage(ImageSource.camera);
-                            setState(() {
-                              file = pickedFile;
-                            });
-                          },
-                          onGalleryTap: () async {
-                            final pickedFile = await _controller
-                                .pickImage(ImageSource.gallery);
-                            setState(() {
-                              file = pickedFile;
-                            });
-                          })
-                      : Image(image: NetworkImage(evento!.url!)),
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: InviteFields(
-                          fieldTitle: 'Data:',
-                          topPadding: 8.0,
-                        ),
+        appBar: AppBar(
+          elevation: 0,
+        ),
+        body: SingleChildScrollView(
+          controller: _scrollController,
+          child: Screenshot(
+            controller: screenshotController,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                EventNameField(
+                  isedit: isCreate,
+                  nameEvent: nameYourEvent,
+                  textController: eventNameController,
+                ),
+                // widget que tem a função de tirar/escolher foto e mostrar sua preview
+                isCreate
+                    ? ImagePreviewWidget(
+                        previewImage: file,
+                        onCameraTap: () async {
+                          final pickedFile =
+                              await _controller.pickImage(ImageSource.camera);
+                          setState(() {
+                            file = pickedFile;
+                          });
+                        },
+                        onGalleryTap: () async {
+                          final pickedFile =
+                              await _controller.pickImage(ImageSource.gallery);
+                          setState(() {
+                            file = pickedFile;
+                          });
+                        })
+                    : Image(image: NetworkImage(evento!.url!)),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Expanded(
+                      child: InviteFields(
+                        fieldTitle: 'Data:',
+                        topPadding: 8.0,
                       ),
-                      Expanded(
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: InviteFieldsText(
+                        isedit: isCreate,
+                        myHintText: '01/04/2022',
+                        textController: eventDateController,
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(children: [
+                   const Expanded(
+                      child: InviteFields(
+                        fieldTitle: 'Local:',
+                        topPadding: 8.0,
+                      ),
+                    ),
+                   Expanded(
                         flex: 4,
                         child: InviteFieldsText(
-                          isedit: isCreate,
-                          myHintText: '01/04/2022',
-                          textController: eventDateController,
-                        ),
+                            isedit: isCreate,
+                            textController: eventLocationController,
+                            myHintText: 'R. Nunes Machado, 1000')),
+                ],),
+
+                Row(
+                  children: [
+                    const Expanded(
+                      child: InviteFields(
+                        fieldTitle: 'Valor:',
+                        topPadding: 8.0,
                       ),
-                      Expanded(
-                          flex: 4,
-                          child: InviteFieldsText(
-                              isedit: isCreate,
-                              textController: eventLocationController,
-                              myHintText: 'R. Nunes Machado, 1000')),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: InviteFields(
-                          fieldTitle: 'Valor:',
-                          topPadding: 8.0,
-                        ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: InviteFieldsText(
+                        isedit: isCreate,
+                        myHintText: 'R\$ 50,00',
+                        textController: eventCostController,
                       ),
-                      Expanded(
-                        flex: 4,
-                        child: InviteFieldsText(
-                          isedit: isCreate,
-                          myHintText: 'R\$ 50,00',
-                          textController: eventCostController,
-                        ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: InviteFields(
+                        fieldTitle: 'PIX',
+                        topPadding: 8.0,
                       ),
-                      Row(
-                        children: [
-                          const Expanded(
-                            child: InviteFields(
-                              fieldTitle: 'PIX',
-                              topPadding: 8.0,
-                            ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: InviteFieldsText(
+                        isedit: isCreate,
+                        myHintText: '(41) 99999-9999',
+                        textController: eventPaymentController,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: isCreate
+                        ? ElevatedButton(
+                            child: const Text('Criar'),
+                            style: Theme.of(context).elevatedButtonTheme.style,
+                            onPressed: () async {
+                              setState(() => isLoading = true);
+                              if (file != null) {
+                                await _controller.uploadImage(
+                                    file!, eventNameController!.text);
+                              }
+                              final url = await _controller
+                                  .getImageUrl(eventNameController!.text);
+                              setState(() {
+                                imageUrl = url;
+                              });
+                              await _controller.addTextFields(
+                                eventNameController!.text,
+                                eventDateController!.text,
+                                eventLocationController!.text,
+                                eventCostController!.text,
+                                eventPaymentController!.text,
+                                userID,
+                                imageUrl,
+                              );
+                              setState(() => isLoading = false);
+                              await _dialogController.showMyDialog(
+                                  context,
+                                  'Convite Criado!',
+                                  'Agora é só aguardar o grande dia.',
+                                  'Ok', () async {
+                                await captureScreen();
+                              }, 'Compartilhar');
+                            },
+                          )
+                        : ElevatedButton(
+                            child: const Text('Compartilhar'),
+                            style: Theme.of(context).elevatedButtonTheme.style,
+                            onPressed: () async {
+                              await captureScreen();
+                            },
                           ),
-                          Expanded(
-                            flex: 4,
-                            child: InviteFieldsText(
-                              isedit: isCreate,
-                              myHintText: '(41) 99999-9999',
-                              textController: eventPaymentController,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        child: SizedBox(
-                          height: 50,
-                          child: isCreate
-                              ? ElevatedButton(
-                                  child: const Text('Criar'),
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style,
-                                  onPressed: () async {
-                                    setState(() => isLoading = true);
-                                    if (file != null) {
-                                      await _controller.uploadImage(
-                                          file!, eventNameController!.text);
-                                    }
-                                    final url = await _controller
-                                        .getImageUrl(eventNameController!.text);
-                                    setState(() {
-                                      imageUrl = url;
-                                    });
-                                    await _controller.addTextFields(
-                                      eventNameController!.text,
-                                      eventDateController!.text,
-                                      eventLocationController!.text,
-                                      eventCostController!.text,
-                                      eventPaymentController!.text,
-                                      userID,
-                                      imageUrl,
-                                    );
-                                    setState(() => isLoading = false);
-                                    await _dialogController.showMyDialog(
-                                        context,
-                                        'Convite Criado!',
-                                        'Agora é só aguardar o grande dia.',
-                                        'Ok', () async {
-                                      await captureScreen();
-                                    }, 'Compartilhar');
-                                  },
-                                )
-                              : ElevatedButton(
-                                  child: const Text('Compartilhar'),
-                                  style: Theme.of(context)
-                                      .elevatedButtonTheme
-                                      .style,
-                                  onPressed: () {},
-                                ),
-                        ),
-                      ),
-                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        );
+        ),
+      );
   Future<void> captureScreen() async {
     await _invitationShareController.screenCapture(screenshotController);
   }

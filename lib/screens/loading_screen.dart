@@ -8,10 +8,10 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.buttonsColor,
+      backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: SpinKitWave(
-          color: AppColors.backgroundColor,
+          color: AppColors.buttonsColor,
           size: 50,
         ),
       ),

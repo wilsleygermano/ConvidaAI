@@ -26,14 +26,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getEvents() {
-    eventsList = [];
-    FirebaseFirestore.instance
-        .collection('events')
-        .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((doc) {
-              setState(() => eventsList.add(Evento.fromJson(doc.data())));
-            }));
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      eventsList = [];
+      FirebaseFirestore.instance
+          .collection('events')
+          .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((snapshot) => snapshot.docs.forEach((doc) {
+                setState(() => eventsList.add(Evento.fromJson(doc.data())));
+              }));
+    }
   }
 
   @override

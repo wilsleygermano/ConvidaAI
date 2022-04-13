@@ -1,3 +1,4 @@
+import 'package:convida_ai_1/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../design/app_theme.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.appTheme,
-      home: const MyHomePage(),
+      home:  const MyHomePage(),
     );
   }
 }

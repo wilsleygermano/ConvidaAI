@@ -7,7 +7,8 @@ class Evento {
   String? pix;
   String uID;
 
-  Evento(this.titulo, this.url, this.data, this.local, this.valor, this.pix, this.uID);
+  Evento(this.titulo, this.url, this.data, this.local, this.valor, this.pix,
+      this.uID);
 
   Map<String, dynamic> toJson() {
     return {

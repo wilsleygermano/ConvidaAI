@@ -28,7 +28,11 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => InviteCreation()),
+              MaterialPageRoute(
+                  builder: (context) => InviteCreation(
+                        isCreate: true,
+                        titulo: '',
+                      )),
             );
           },
           icon: const Icon(Icons.add),

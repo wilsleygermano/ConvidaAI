@@ -134,7 +134,6 @@ class _InviteCreationState extends State<InviteCreation> {
                         })
                     : Image(image: NetworkImage(evento!.url!)),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Expanded(
                       child: InviteFields(
@@ -143,7 +142,7 @@ class _InviteCreationState extends State<InviteCreation> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: InviteFieldsText(
                         isedit: isCreate,
                         myHintText: '01/04/2022',
@@ -161,7 +160,7 @@ class _InviteCreationState extends State<InviteCreation> {
                       ),
                     ),
                    Expanded(
-                        flex: 4,
+                        flex: 3,
                         child: InviteFieldsText(
                             isedit: isCreate,
                             textController: eventLocationController,
@@ -177,7 +176,7 @@ class _InviteCreationState extends State<InviteCreation> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: InviteFieldsText(
                         isedit: isCreate,
                         myHintText: 'R\$ 50,00',
@@ -195,7 +194,7 @@ class _InviteCreationState extends State<InviteCreation> {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: InviteFieldsText(
                         isedit: isCreate,
                         myHintText: '(41) 99999-9999',
@@ -205,7 +204,7 @@ class _InviteCreationState extends State<InviteCreation> {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.only(left: 10, top: 16),
                   child: SizedBox(
                     height: 50,
                     child: isCreate

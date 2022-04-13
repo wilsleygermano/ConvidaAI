@@ -98,42 +98,41 @@ class _InviteCreationState extends State<InviteCreation> {
   Widget build(BuildContext context) => isLoading
       ? const LoadingScreen()
       : Scaffold(
-
-        appBar: AppBar(
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          controller: _scrollController,
-          child: Screenshot(
-            controller: screenshotController,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                EventNameField(
-                  isedit: isCreate,
-                  nameEvent: nameYourEvent,
-                  textController: eventNameController,
-                ),
-                // widget que tem a função de tirar/escolher foto e mostrar sua preview
-                isCreate
-                    ? ImagePreviewWidget(
-                        previewImage: file,
-                        onCameraTap: () async {
-                          final pickedFile =
-                              await _controller.pickImage(ImageSource.camera);
-                          setState(() {
-                            file = pickedFile;
-                          });
-                        },
-                        onGalleryTap: () async {
-                          final pickedFile =
-                              await _controller.pickImage(ImageSource.gallery);
-                          setState(() {
-                            file = pickedFile;
-                          });
-                        })
-                    : Card(
+          appBar: AppBar(
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            controller: _scrollController,
+            child: Screenshot(
+              controller: screenshotController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  EventNameField(
+                    isedit: isCreate,
+                    nameEvent: nameYourEvent,
+                    textController: eventNameController,
+                  ),
+                  // widget que tem a função de tirar/escolher foto e mostrar sua preview
+                  isCreate
+                      ? ImagePreviewWidget(
+                          previewImage: file,
+                          onCameraTap: () async {
+                            final pickedFile =
+                                await _controller.pickImage(ImageSource.camera);
+                            setState(() {
+                              file = pickedFile;
+                            });
+                          },
+                          onGalleryTap: () async {
+                            final pickedFile = await _controller
+                                .pickImage(ImageSource.gallery);
+                            setState(() {
+                              file = pickedFile;
+                            });
+                          })
+                      : Card(
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),
@@ -149,8 +148,7 @@ class _InviteCreationState extends State<InviteCreation> {
                                 height: 350,
                                 fit: BoxFit.cover,
                               ))),
-                Row(
-                  children: [
+                  Row(children: [
                     const Expanded(
                       child: InviteFields(
                         fieldTitle: 'Data:',
@@ -162,9 +160,11 @@ class _InviteCreationState extends State<InviteCreation> {
                       child: InviteFieldsText(
                         isedit: isCreate,
                         myHintText: '01/04/2022',
-                        textController: eventDateController,),),
+                        textController: eventDateController,
+                      ),
+                    ),
                   ]),
-                Row(
+                  Row(
                     children: [
                       const Expanded(
                         child: InviteFields(
@@ -172,14 +172,16 @@ class _InviteCreationState extends State<InviteCreation> {
                           topPadding: 8.0,
                         ),
                       ),
-                   Expanded(
+                      Expanded(
                         flex: 3,
                         child: InviteFieldsText(
                             isedit: isCreate,
                             textController: eventLocationController,
-                            myHintText: 'R. Nunes Machado, 1000')),
-                ],),
-                Row(
+                            myHintText: 'R. Nunes Machado, 1000'),
+                      ),
+                    ],
+                  ),
+                  Row(
                     children: [
                       const Expanded(
                         child: InviteFields(
@@ -187,12 +189,16 @@ class _InviteCreationState extends State<InviteCreation> {
                           topPadding: 8.0,
                         ),
                       ),
-                    Expanded(
-                      flex: 3,
-                      child: InviteFieldsText(
-                        isedit: isCreate,
-                        myHintText: 'R\$ 50,00',
-                        textController: eventCostController,),),],),
+                      Expanded(
+                        flex: 3,
+                        child: InviteFieldsText(
+                          isedit: isCreate,
+                          myHintText: 'R\$ 50,00',
+                          textController: eventCostController,
+                        ),
+                      ),
+                    ],
+                  ),
                   Row(
                     children: [
                       const Expanded(
@@ -201,18 +207,18 @@ class _InviteCreationState extends State<InviteCreation> {
                           topPadding: 8.0,
                         ),
                       ),
-                    Expanded(
-                      flex: 3,
-                      child: InviteFieldsText(
-                        isedit: isCreate,
-                        myHintText: '(41) 99999-9999',
-                        textController: eventPaymentController,
+                      Expanded(
+                        flex: 3,
+                        child: InviteFieldsText(
+                          isedit: isCreate,
+                          myHintText: '(41) 99999-9999',
+                          textController: eventPaymentController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 10),
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, top: 24),
                     child: SizedBox(
                       height: 50,
                       child: isCreate

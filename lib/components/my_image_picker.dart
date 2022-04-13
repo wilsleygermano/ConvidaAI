@@ -67,6 +67,7 @@ class _ImagePickerOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
             leading: const Icon(Icons.photo_camera),

@@ -30,8 +30,9 @@ class _EventNameFieldState extends State<EventNameField> {
   Widget build(BuildContext context) {
     return TextField(
       inputFormatters: [
-        LengthLimitingTextInputFormatter(30)
+        LengthLimitingTextInputFormatter(30),
       ],
+      textInputAction: TextInputAction.done,
       controller: widget.textController,
       textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.characters,

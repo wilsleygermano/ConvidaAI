@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../design/app_colors.dart';
@@ -28,8 +29,10 @@ class _EventNameFieldState extends State<EventNameField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(30)
+      ],
       controller: widget.textController,
-      maxLength: 30,
       textAlign: TextAlign.center,
       textCapitalization: TextCapitalization.characters,
       readOnly: !isedit,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../design/app_colors.dart';
@@ -31,8 +32,11 @@ class _InviteFieldsTextState extends State<InviteFieldsText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(30)
+      ],
+      textInputAction: TextInputAction.next,
       controller: widget.textController,
-      maxLength: 30,
       readOnly: !isedit,
       style: TextStyle(
         fontFamily: GoogleFonts.inter().fontFamily,
@@ -41,7 +45,7 @@ class _InviteFieldsTextState extends State<InviteFieldsText> {
         fontWeight: FontWeight.bold,
       ),
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(top: 30),
+        contentPadding: const EdgeInsets.only(top: 8),
         hintText: widget.myHintText,
         hintStyle: TextStyle(
           fontFamily: GoogleFonts.inter().fontFamily,

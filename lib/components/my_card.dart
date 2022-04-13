@@ -67,10 +67,10 @@ class _MyCardState extends State<MyCard> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image(
-                        image: widget.eventImage,
-                        width: 96,
-                        height: 96,
-                      ),
+                          image: widget.eventImage,
+                          width: 96,
+                          height: 96,
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ],

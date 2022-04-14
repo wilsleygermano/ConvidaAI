@@ -28,8 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void getEvents() {
     final user = FirebaseAuth.instance.currentUser;
+    eventsList = [];
     if (user != null) {
-      eventsList = [];
       FirebaseFirestore.instance
           .collection('events')
           .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)

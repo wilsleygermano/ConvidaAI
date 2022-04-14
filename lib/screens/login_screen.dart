@@ -2,6 +2,7 @@ import 'package:convida_ai_1/design/app_colors.dart';
 import 'package:convida_ai_1/screens/create_user_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginWidget extends StatefulWidget {
   final Function mudarEstado;
@@ -97,10 +98,48 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
-    );
+    )
+        .catchError((e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            'Erro de Login e Senha',
+            style: TextStyle(
+                fontFamily: GoogleFonts.inter().fontFamily,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.titlesColor),
+          ),
+          content: Text(
+            'Login ou senha errados!',
+            style: TextStyle(
+              fontFamily: GoogleFonts.inter().fontFamily,
+              fontSize: 12,
+              color: AppColors.textColor,
+            ),
+          ),
+          actions: <Widget>[
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Ok',
+                style: TextStyle(
+                    fontFamily: GoogleFonts.inter().fontFamily,
+                    fontSize: 12,
+                    color: AppColors.miniIconsColor),
+              ),
+            )
+          ],
+        ),
+      );
+    });
     mudarEstado();
   }
 }

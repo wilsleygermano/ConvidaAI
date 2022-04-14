@@ -117,20 +117,16 @@ class _MyCardState extends State<MyCard> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.eventName,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.inter().fontFamily,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.textFieldColor,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      widget.eventName,
+                      softWrap: true,
+                      style: TextStyle(
+                        fontFamily: GoogleFonts.inter().fontFamily,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textFieldColor,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                   Column(

@@ -65,6 +65,7 @@ class _MyCardState extends State<MyCard> {
           width: 328,
           height: 112,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Column(
@@ -112,68 +113,71 @@ class _MyCardState extends State<MyCard> {
                   ],
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
-                    child: Text(
-                      widget.eventName,
-                      softWrap: true,
-                      style: TextStyle(
-                        fontFamily: GoogleFonts.inter().fontFamily,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textFieldColor,
-                        overflow: TextOverflow.ellipsis,
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
+                      child: Text(
+                        widget.eventName,
+                        softWrap: true,
+                        style: TextStyle(
+                          fontFamily: GoogleFonts.inter().fontFamily,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textFieldColor,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16.0,
-                          top: 2.0,
-                        ),
-                        child: Text(
-                          widget.eventDate,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.inter().fontFamily,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            color: AppColors.miniTextColor,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16.0,
+                            top: 2.0,
+                          ),
+                          child: Text(
+                            widget.eventDate,
+                            softWrap: true,
                             overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.miniTextColor,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16.0,
-                          top: 22.0,
-                        ),
-                        child: Text(
-                          widget.eventLocation,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontFamily: GoogleFonts.inter().fontFamily,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            color: AppColors.miniTextColor,
-                            overflow: TextOverflow.ellipsis,
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16.0,
+                            top: 22.0,
+                          ),
+                          child: Text(
+                            widget.eventLocation,
+                            softWrap: true,
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.inter().fontFamily,
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.miniTextColor,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

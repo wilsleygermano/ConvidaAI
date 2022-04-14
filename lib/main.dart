@@ -5,7 +5,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'screens/my_app.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
+  FlutterNativeSplash.remove();
 }
+

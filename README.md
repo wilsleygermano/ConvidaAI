@@ -1,4 +1,4 @@
-# convida_ai_1
+# ConvidaAí App
 
 This project was proposed on a training course organized by Snowman Labs. Its main purpose is to allow users to create and share their events on their group on WhatsApp, Facebook or any other platform.
 

@@ -16,17 +16,22 @@ If you want to create an event, you need to tap the top right 'Add' symbol, and 
 
 <img src="./screenshots/criar.png" width="200">
 
-When fill your event`s information and then tap 'Criar', a dialog is shown.
+When fill your event`s information and then tap 'Criar', a dialog is shown informing that you have created an event and then a share button appears. It is illustrated in the image bellow.
+
+<img src="./screenshots/event_created.png" width="200">
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+If you would like to collaborate or just run this app on your computer, remember that you need to have this items on your Desktop:
 
-A few resources to get you started if this is your first Flutter project:
+- Dart
+- Flutter
+- Visual Studio Code
+- Android Studio
+- XCode (MacOS)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+And then you need to run the following command in your terminal:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+git clone https://github.com/wilsleygermano/ConvidaAI.git
+```

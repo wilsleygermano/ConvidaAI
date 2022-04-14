@@ -1,12 +1,8 @@
-import 'package:convida_ai_1/controller/invite_share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:screenshot/screenshot.dart';
-
 import '../design/app_colors.dart';
 import '../screens/my_home_page.dart';
 
-final _imageShareController = InvitationShareController();
 
 class MyDialog {
   Future showMyDialog(context, String myTitle, String myContent,
@@ -46,7 +42,7 @@ class MyDialog {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(),
+                  builder: (context) => const MyHomePage(),
                 ),
               );
             },

@@ -23,6 +23,7 @@ class InviteCreationController {
     try {
       await invitationsImagesRef.putFile(fileToUpload);
     } on FirebaseException catch (e) {
+      // ignore: avoid_print
       print('Não foi possível salvar a foto: ${e.code}');
     }
   }

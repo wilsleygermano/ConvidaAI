@@ -26,6 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   void initState() {
+    // ignore: unnecessary_this
     this.mudarEstado = widget.mudarEstado;
     super.initState();
   }

@@ -4,13 +4,17 @@ This project was proposed on a training course organized by Snowman Labs. Its ma
 
 You need to login on our app, to do it you need to register first, and then use it to login. The login and registration screen are illustrated bellow.
 
-<img src="./screenshots/login.png" width="200">
+<div style="display: flex;">
+<img src="./screenshots/login.png" width="200">&nbsp;&nbsp;&nbsp;
 <img src="./screenshots/registrar.png" width="200">
+</div>
 
 When you are redirected to our home page, you can see a list of events that you created. And then when you tap on one of them, you will see a page with further information. It is illustrated on the images bellow.
 
-<img src="./screenshots/homepage.png" width="200">
+<div style="display: flex;">
+<img src="./screenshots/homepage.png" width="200">&nbsp;&nbsp;&nbsp;
 <img src="./screenshots/card.png" width="200">
+</div>
 
 If you want to create an event, you need to tap the top right 'Add' symbol, and a new screen is shown as illustrated bellow.
 

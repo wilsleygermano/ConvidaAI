@@ -58,8 +58,10 @@ flutter_icons:
   image_path: "lib/assets/icon.png"
 
 flutter_native_splash:
-  color: '#FFFFFF'
-  image: 
+  color: '#DD5D4A'
+  image: 'lib/assests/slpash.png'
+  android: true
+  ios: false
 
 dev_dependencies:
   flutter_test:

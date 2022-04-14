@@ -1,10 +1,8 @@
-import 'package:convida_ai_1/classes/evento.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
-import 'package:convida_ai_1/screens/invite_creation_2.dart';
+import 'package:convida_ai_1/screens/invite_creation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../screens/invite_creation.dart';
 
 class MyCard extends StatefulWidget {
   const MyCard(

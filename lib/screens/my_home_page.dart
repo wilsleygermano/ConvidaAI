@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:convida_ai_1/components/my_drawer.dart';
-import 'package:convida_ai_1/screens/invite_creation_2.dart';
+import 'package:convida_ai_1/screens/invite_creation.dart';
 import 'package:convida_ai_1/screens/login_screen.dart';
 
 import 'package:convida_ai_1/components/my_card.dart';
@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import '../classes/evento.dart';
 import '../components/my_sliver_app_bar.dart';
-import 'invite_creation.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -35,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
           .collection('events')
           .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get()
+          // ignore: avoid_function_literals_in_foreach_calls
           .then((snapshot) => snapshot.docs.forEach((doc) {
                 setState(() => eventsList.add(Evento.fromJson(doc.data())));
               }));

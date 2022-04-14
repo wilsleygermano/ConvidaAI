@@ -58,6 +58,7 @@ class InviteCreationgLoadingWidget extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {},
+                  // ignore: sized_box_for_whitespace
                   child: Container(
                     height: 32,
                     width: 64,

@@ -1,4 +1,3 @@
-import 'package:convida_ai_1/screens/invite_creation.dart';
 import 'package:flutter/material.dart';
 
 class MySliverAppBar extends StatefulWidget {

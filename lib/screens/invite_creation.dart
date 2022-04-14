@@ -9,7 +9,6 @@ import 'package:convida_ai_1/components/invite_fields_text.dart';
 import 'package:convida_ai_1/components/my_image_picker.dart';
 import 'package:convida_ai_1/controller/invite_creation_controller.dart';
 import 'package:convida_ai_1/controller/invite_share_controller.dart';
-import 'package:convida_ai_1/screens/loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -98,9 +97,8 @@ class _InviteCreationState extends State<InviteCreation> {
   }
 
   @override
-  Widget build(BuildContext context) => isLoading
-      ? const LoadingScreen()
-      : Scaffold(
+  Widget build(BuildContext context) => 
+      Scaffold(
           appBar: AppBar(
             elevation: 0,
           ),

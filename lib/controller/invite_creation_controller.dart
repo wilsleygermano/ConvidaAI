@@ -39,8 +39,14 @@ class InviteCreationController {
     return FirebaseFirestore.instance
         .collection('events')
         .doc()
-        .set(Evento(eventName, imageUrl, eventDate, eventLocation, eventCost,
-                eventPayment, uID)
+        .set(Evento(
+                titulo: eventName,
+                url: imageUrl,
+                data: eventDate,
+                local: eventLocation,
+                valor: eventCost,
+                pix: eventPayment,
+                uID: uID)
             .toJson())
         .then((value) => debugPrint('Event added'))
         .catchError((error) => debugPrint("Failed to add user: $error"));

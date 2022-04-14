@@ -1,4 +1,6 @@
+import 'package:convida_ai_1/classes/evento.dart';
 import 'package:convida_ai_1/design/app_colors.dart';
+import 'package:convida_ai_1/screens/invite_creation_2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,12 +12,17 @@ class MyCard extends StatefulWidget {
       this.eventName = 'Nome do Evento',
       this.eventDate = '08/07/2018',
       this.eventLocation = 'R.Nunes Machado, 1000',
-      this.eventImage = const AssetImage('lib/assets/festa.png')})
+      this.eventImage = const AssetImage('lib/assets/festa.png'),
+      this.imageUrl,
+      required this.eventPrice,
+      required this.pixKey})
       : super(key: key);
-
+  final String? imageUrl;
   final String eventName;
   final String eventDate;
   final String eventLocation;
+  final String eventPrice;
+  final String pixKey;
   final ImageProvider<Object> eventImage;
 
   @override
@@ -46,9 +53,13 @@ class _MyCardState extends State<MyCard> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => InviteCreation(
-                      isCreate: false,
-                      titulo: eventName,
+                builder: (context) => InviteCreation2.viewing(
+                      eventPrice: widget.eventPrice,
+                      eventDate: widget.eventDate,
+                      eventImage: NetworkImage(widget.imageUrl!),
+                      eventLocation: widget.eventLocation,
+                      eventName: widget.eventName,
+                      pixKey: widget.pixKey,
                     )),
           );
         },

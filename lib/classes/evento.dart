@@ -7,8 +7,14 @@ class Evento {
   String? pix;
   String uID;
 
-  Evento(this.titulo, this.url, this.data, this.local, this.valor, this.pix,
-      this.uID);
+  Evento(
+      {required this.titulo,
+      this.url,
+      required this.data,
+      required this.local,
+      this.valor = "0",
+      this.pix = "N/A",
+      required this.uID});
 
   Map<String, dynamic> toJson() {
     return {
@@ -23,7 +29,13 @@ class Evento {
   }
 
   static Evento fromJson(Map<String, dynamic> json) {
-    return Evento(json['titulo'], json['url'], json['data'], json['local'],
-        json['valor'], json['pix'], json['user_uid']);
+    return Evento(
+        titulo: json['titulo'],
+        url: json['url'],
+        data: json['data'],
+        local: json['local'],
+        valor: json['valor'],
+        pix: json['pix'],
+        uID: json['user_uid']);
   }
 }

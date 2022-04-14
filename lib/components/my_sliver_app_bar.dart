@@ -2,7 +2,9 @@ import 'package:convida_ai_1/screens/invite_creation.dart';
 import 'package:flutter/material.dart';
 
 class MySliverAppBar extends StatefulWidget {
-  const MySliverAppBar({Key? key}) : super(key: key);
+  final void Function() onAddButtonPressed;
+  const MySliverAppBar({Key? key, required this.onAddButtonPressed})
+      : super(key: key);
 
   @override
   State<MySliverAppBar> createState() => _MySliverAppBarState();
@@ -25,16 +27,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
       actions: [
         IconButton(
           iconSize: 32,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => InviteCreation(
-                        isCreate: true,
-                        titulo: '',
-                      )),
-            );
-          },
+          onPressed: widget.onAddButtonPressed,
           icon: const Icon(Icons.add),
           color: Theme.of(context).appBarTheme.iconTheme!.color,
         ),

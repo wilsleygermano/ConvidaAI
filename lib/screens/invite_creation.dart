@@ -9,7 +9,6 @@ import 'package:convida_ai_1/components/invite_fields_text.dart';
 import 'package:convida_ai_1/components/my_image_picker.dart';
 import 'package:convida_ai_1/controller/invite_creation_controller.dart';
 import 'package:convida_ai_1/controller/invite_share_controller.dart';
-import 'package:convida_ai_1/screens/loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -73,31 +72,33 @@ class _InviteCreationState extends State<InviteCreation> {
   }
 
   void getEvent() {
-    FirebaseFirestore.instance
-        .collection('events')
-        .where('user_uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .where('titulo', isEqualTo: titulo)
-        .get()
-        .then((snapshot) async {
-      if (snapshot.docs.isNotEmpty) {
-        setState(() {
-          evento = Evento.fromJson(snapshot.docs[0].data());
-        });
-        if (evento != null) {
-          eventCostController!.text = evento!.valor!;
-          eventDateController!.text = evento!.data;
-          eventLocationController!.text = evento!.local;
-          eventNameController!.text = evento!.titulo;
-          eventPaymentController!.text = evento!.pix!;
+    if (userID.isNotEmpty) {
+      FirebaseFirestore.instance
+          .collection('events')
+          .where('user_uid', isEqualTo: userID)
+          .where('titulo', isEqualTo: titulo)
+          .get()
+          .then((snapshot) {
+        if (snapshot.docs.isNotEmpty) {
+          setState(() {
+            evento = Evento.fromJson(snapshot.docs[0].data());
+          });
+
+          if (evento != null) {
+            eventCostController!.text = evento!.valor!;
+            eventDateController!.text = evento!.data;
+            eventLocationController!.text = evento!.local;
+            eventNameController!.text = evento!.titulo;
+            eventPaymentController!.text = evento!.pix!;
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   @override
-  Widget build(BuildContext context) => isLoading
-      ? const LoadingScreen()
-      : Scaffold(
+  Widget build(BuildContext context) => 
+      Scaffold(
           appBar: AppBar(
             elevation: 0,
           ),
@@ -121,8 +122,8 @@ class _InviteCreationState extends State<InviteCreation> {
                           ? ImagePreviewWidget(
                               previewImage: file,
                               onCameraTap: () async {
-                                final pickedFile =
-                                    await _controller.pickImage(ImageSource.camera);
+                                final pickedFile = await _controller
+                                    .pickImage(ImageSource.camera);
                                 setState(() {
                                   file = pickedFile;
                                 });
@@ -219,59 +220,56 @@ class _InviteCreationState extends State<InviteCreation> {
                           ),
                         ],
                       ),
-                      
                     ],
                   ),
                 ),
                 Container(
-                        margin: const EdgeInsets.only(left: 10, top: 24),
-                        child: SizedBox(
-                          height: 50,
-                          child: isCreate
-                              ? ElevatedButton(
-                                  child: const Text('Criar'),
-                                  style:
-                                      Theme.of(context).elevatedButtonTheme.style,
-                                  onPressed: () async {
-                                    setState(() => isLoading = true);
-                                    if (file != null) {
-                                      await _controller.uploadImage(
-                                          file!, eventNameController!.text);
-                                    }
-                                    final url = await _controller
-                                        .getImageUrl(eventNameController!.text);
-                                    setState(() {
-                                      imageUrl = url;
-                                    });
-                                    await _controller.addTextFields(
-                                      eventNameController!.text,
-                                      eventDateController!.text,
-                                      eventLocationController!.text,
-                                      eventCostController!.text,
-                                      eventPaymentController!.text,
-                                      userID,
-                                      imageUrl,
-                                    );
-                                    setState(() => isLoading = false);
-                                    await _dialogController.showMyDialog(
-                                        context,
-                                        'Convite Criado!',
-                                        'Agora é só aguardar o grande dia.',
-                                        'Ok', () async {
-                                      await captureScreen();
-                                    }, 'Compartilhar');
-                                  },
-                                )
-                              : ElevatedButton(
-                                  child: const Text('Compartilhar'),
-                                  style:
-                                      Theme.of(context).elevatedButtonTheme.style,
-                                  onPressed: () async {
-                                    await captureScreen();
-                                  },
-                                ),
-                        ),
-                      ),
+                  margin: const EdgeInsets.only(left: 10, top: 24),
+                  child: SizedBox(
+                    height: 50,
+                    child: isCreate
+                        ? ElevatedButton(
+                            child: const Text('Criar'),
+                            style: Theme.of(context).elevatedButtonTheme.style,
+                            onPressed: () async {
+                              setState(() => isLoading = true);
+                              if (file != null) {
+                                await _controller.uploadImage(
+                                    file!, eventNameController!.text);
+                              }
+                              final url = await _controller
+                                  .getImageUrl(eventNameController!.text);
+                              setState(() {
+                                imageUrl = url;
+                              });
+                              await _controller.addTextFields(
+                                eventNameController!.text,
+                                eventDateController!.text,
+                                eventLocationController!.text,
+                                eventCostController!.text,
+                                eventPaymentController!.text,
+                                userID,
+                                imageUrl,
+                              );
+                              setState(() => isLoading = false);
+                              await _dialogController.showMyDialog(
+                                  context,
+                                  'Convite Criado!',
+                                  'Agora é só aguardar o grande dia.',
+                                  'Ok', () async {
+                                await captureScreen();
+                              }, 'Compartilhar');
+                            },
+                          )
+                        : ElevatedButton(
+                            child: const Text('Compartilhar'),
+                            style: Theme.of(context).elevatedButtonTheme.style,
+                            onPressed: () async {
+                              await captureScreen();
+                            },
+                          ),
+                  ),
+                ),
               ],
             ),
           ),

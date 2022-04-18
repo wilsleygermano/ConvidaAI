@@ -43,7 +43,7 @@ class AboutWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                      'Este aplicativo é um projeto da Snow Academy, idealizado por Thiago Nagaoka e Wisley Germano.',
+                      'Este aplicativo é um projeto da Snow Academy, idealizado por Thiago Nagaoka e Wilsley Germano.',
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                           height: 2,

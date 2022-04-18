@@ -59,7 +59,6 @@ class AboutWidget extends StatelessWidget {
                         },
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            mainAxisSize: MainAxisSize.min,
                             children: [
                               const ImageIcon(
                                   AssetImage('lib/assets/github_logo.png'),

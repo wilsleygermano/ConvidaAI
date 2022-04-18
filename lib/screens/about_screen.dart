@@ -28,64 +28,69 @@ class AboutWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: AppColors.titlesColor)),
         ),
-        body: Center(
-            child: Column(children: [
-          const SizedBox(height: 16),
-          Image.asset('lib/assets/convida_logo.png', width: 250, height: 75),
-          const SizedBox(height: 60),
-          Container(
-              margin: const EdgeInsets.only(left: 28, right: 29),
-              padding: const EdgeInsets.only(
-                  top: 63, left: 22, right: 22, bottom: 78),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.titlesColor)),
-              child: Column(
-                children: [
-                  Text(
-                      'Este aplicativo é um projeto da Snow Academy, idealizado por Thiago Nagaoka e Wilsley Germano.',
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                          height: 2,
-                          fontFamily: GoogleFonts.inter().fontFamily,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16)),
-                  const SizedBox(height: 60),
-                  ElevatedButton(
-                      style: Theme.of(context).elevatedButtonTheme.style,
-                      onPressed: () async {
-                        await launch('https://github.com/nagaoka-thiago');
-                      },
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const ImageIcon(
-                                AssetImage('lib/assets/github_logo.png'),
-                                color: Colors.white),
-                            Text('https://github.com/nagaoka-thiago',
-                                style: TextStyle(
-                                    fontFamily: GoogleFonts.inter().fontFamily,
-                                    fontSize: 13))
-                          ])),
-                  const SizedBox(height: 60),
-                  ElevatedButton(
-                      style: Theme.of(context).elevatedButtonTheme.style,
-                      onPressed: () async {
-                        await launch('https://github.com/wilsleygermano');
-                      },
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const ImageIcon(
-                                AssetImage('lib/assets/github_logo.png'),
-                                color: Colors.white),
-                            Text('https://github.com/wilsleygermano',
-                                style: TextStyle(
-                                    fontFamily: GoogleFonts.inter().fontFamily,
-                                    fontSize: 13))
-                          ]))
-                ],
-              ))
-        ])));
+        body: SingleChildScrollView(
+          child: Center(
+              child: Column(children: [
+            const SizedBox(height: 16),
+            Image.asset('lib/assets/convida_logo.png', width: 250, height: 75),
+            const SizedBox(height: 60),
+            Container(
+                margin: const EdgeInsets.only(left: 28, right: 29),
+                padding: const EdgeInsets.only(
+                    top: 63, left: 22, right: 22, bottom: 78),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.titlesColor)),
+                child: Column(
+                  children: [
+                    Text(
+                        'Este aplicativo é um projeto da Snow Academy, idealizado por Thiago Nagaoka e Wilsley Germano.',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                            height: 2,
+                            fontFamily: GoogleFonts.inter().fontFamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)),
+                    const SizedBox(height: 60),
+                    ElevatedButton(
+                        style: Theme.of(context).elevatedButtonTheme.style,
+                        onPressed: () async {
+                          await launch('https://github.com/nagaoka-thiago');
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const ImageIcon(
+                                  AssetImage('lib/assets/github_logo.png'),
+                                  color: Colors.white),
+                              Text('https://github.com/nagaoka-thiago',
+                                  style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.inter().fontFamily,
+                                      fontSize: 12))
+                            ])),
+                    const SizedBox(height: 60),
+                    ElevatedButton(
+                        style: Theme.of(context).elevatedButtonTheme.style,
+                        onPressed: () async {
+                          await launch('https://github.com/wilsleygermano');
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              const ImageIcon(
+                                  AssetImage('lib/assets/github_logo.png'),
+                                  color: Colors.white),
+                              Text('https://github.com/wilsleygermano',
+                                  style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.inter().fontFamily,
+                                      fontSize: 12))
+                            ]))
+                  ],
+                ))
+          ])),
+        ));
   }
 }
